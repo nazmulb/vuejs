@@ -25,6 +25,11 @@ const routes = [
     name: 'Contact',
     component: Contact
   },
+  {
+    path: '/product',
+    name: 'Product',
+    component: () => import('../views/Product.vue')
+  }
 ];
 
 const router = new VueRouter({
