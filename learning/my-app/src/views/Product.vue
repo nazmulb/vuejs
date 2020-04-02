@@ -4,9 +4,9 @@
     <ul>
       <li v-for="(product, index) in products" :key="index">
         <input type="number" v-model.number="product.quantity" />
-        {{ product.name }}
+        {{ product.name | capitalize }}
         <span v-if="product.quantity === 0">- OUT OF STOCK</span>
-        <button @click="product.quantity += 1">Add</button>
+        <button @click="addProductQuantityByOne(product)">Add</button>
       </li>
     </ul>
     <h2>Total Inventory: {{ totalProducts }}</h2>
@@ -20,6 +20,13 @@ export default {
       products: []
     };
   },
+  created() {
+    fetch('https://api.myjson.com/bins/74l63')
+      .then(res => res.json())
+      .then(json => {
+        this.products = json.products;
+      });
+  },
   computed: {
     totalProducts() {
       return this.products.reduce((sum, product) => {
@@ -27,12 +34,15 @@ export default {
       }, 0);
     }
   },
-  created() {
-    fetch('https://api.myjson.com/bins/74l63')
-      .then(res => res.json())
-      .then(json => {
-        this.products = json.products;
-      });
+  methods: {
+    addProductQuantityByOne(product) {
+      product.quantity += 1;
+    }
+  },
+  filters: {
+    capitalize(value) {
+      return value.toUpperCase();
+    }
   }
 };
 </script>
