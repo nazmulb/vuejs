@@ -1,0 +1,22 @@
+{
+  "name": "vuejs",
+  "version": "1.0.0",
+  "description": "Learning vuejs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://nazmulb@github.com/nazmulb/vuejs.git"
+  },
+  "keywords": [
+    "vuejs",
+    "vue.js"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nazmulb/vuejs/issues"
+  },
+  "homepage": "https://github.com/nazmulb/vuejs#readme"
+}
