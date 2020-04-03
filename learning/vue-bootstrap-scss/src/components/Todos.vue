@@ -34,5 +34,5 @@ export default {
 <style lang="scss" scoped>
 .is-complete {
   text-decoration: line-through;
-}</style
->>
+}
+</style>
