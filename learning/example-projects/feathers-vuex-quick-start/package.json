@@ -1,0 +1,19 @@
+{
+  "name": "feathers-vuex-quick-start",
+  "keywords": [
+    "vuex",
+    "vue",
+    "feathers",
+    "feathers-vuex"
+  ],
+  "dependencies": {
+    "@feathersjs/feathers": "3.3.1",
+    "feathers-hooks-common": "4.7.0",
+    "feathers-localstorage": "5.0.0",
+    "feathers-vuex": "1.7.0",
+    "vue": "2.6.10",
+    "vue-material": "1.0.0-beta-10.2",
+    "vuex": "3.1.1"
+  },
+  "description": "Report bugs at bit.ly/auyxzpt\n\nThis demo shows realtime reactivity between the server with feathers-vuex.  As well as the isomorphicity of feathers.\n\nRemembers todo's across refreshes by saving to the browser's Local Storage. Realtime data reactivity works the same with this browser side server as it does if you had feathers connected with sockets."
+}
