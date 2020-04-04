@@ -24,7 +24,7 @@
       </div>
     </nav>
     <ul>
-      <li v-for="user in users" :key="user._id">{{ user.email }}</li>
+      <li v-for="user in users" :key="user._id">{{ user.title }}</li>
     </ul>
   </header>
 </template>
@@ -40,7 +40,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("users", {
+    ...mapGetters("todos", {
       findUsersInStore: "find"
     }),
     users() {
@@ -48,7 +48,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("users", {
+    ...mapActions("todos", {
       findUsers: "find"
     })
   },
