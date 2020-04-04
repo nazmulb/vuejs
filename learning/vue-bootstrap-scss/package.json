@@ -9,6 +9,7 @@
     "lint:fix": "vue-cli-service lint --fix"
   },
   "dependencies": {
+    "@feathersjs/authentication-client": "^4.5.2",
     "@feathersjs/feathers": "^4.5.2",
     "@feathersjs/socketio-client": "^4.5.2",
     "axios": "^0.19.2",
