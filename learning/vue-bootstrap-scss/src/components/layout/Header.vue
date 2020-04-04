@@ -23,16 +23,37 @@
         </ul>
       </div>
     </nav>
+    <ul>
+      <li v-for="user in users" :key="user._id">{{ user.email }}</li>
+    </ul>
   </header>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "Header",
   data() {
     return {
       isCollapsed: true
     };
+  },
+  computed: {
+    ...mapGetters("users", {
+      findUsersInStore: "find"
+    }),
+    users() {
+      return this.findUsersInStore({ query: {} }).data;
+    }
+  },
+  methods: {
+    ...mapActions("users", {
+      findUsers: "find"
+    })
+  },
+  created() {
+    this.findUsers({ query: {} });
   }
 };
 </script>
