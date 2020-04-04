@@ -10,7 +10,7 @@
 // @ is an alias to /src
 import AddTodo from "@/components/AddTodo.vue";
 import Todos from "@/components/Todos.vue";
-import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Home",
@@ -18,36 +18,37 @@ export default {
     AddTodo,
     Todos
   },
-  data() {
-    return {
-      todos: []
-    };
+  computed: {
+    ...mapGetters("todos", {
+      findTodosInStore: "find"
+    }),
+    todos() {
+      return this.findTodosInStore({ query: {} }).data;
+    }
   },
   methods: {
-    deleteTodo(id) {
-      axios
-        .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-        .then(res => (this.todos = this.todos.filter(todo => todo.id !== id)))
+    ...mapActions("todos", {
+      findTodos: "find"
+    }),
+    addTodo(newTodo) {
+      const { Todo } = this.$FeathersVuex.api;
+
+      new Todo(newTodo)
+        .save()
+        .then(() => {})
         .catch(err => console.log(err));
     },
-    addTodo(newTodo) {
-      const { title, completed } = newTodo;
-      axios
-        .post("https://jsonplaceholder.typicode.com/todos", {
-          title,
-          completed
-        })
-        .then(res => (this.todos = [...this.todos, res.data]))
-        .catch(err => console.log(err));
+    deleteTodo(id) {
+      const { Todo } = this.$FeathersVuex.api;
+      Todo.get(id).then(todo => {
+        todo.remove();
+      });
     }
   },
   created() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos?_limit=5")
-      .then(res => (this.todos = res.data))
-      .catch(err => console.log(err));
+    this.findTodos({ query: {} });
   }
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>

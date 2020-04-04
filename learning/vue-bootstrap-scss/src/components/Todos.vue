@@ -9,7 +9,7 @@
         />
         {{ todo.title }}
         <button
-          @click="$emit('del-todo', todo.id)"
+          @click="$emit('del-todo', todo._id)"
           class="btn btn-sm btn-danger py-0"
         >
           x
@@ -26,6 +26,7 @@ export default {
   methods: {
     markComplete(todo) {
       todo.completed = !todo.completed;
+      todo.update();
     }
   }
 };

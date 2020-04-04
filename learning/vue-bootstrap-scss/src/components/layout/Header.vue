@@ -18,19 +18,21 @@
             <router-link class="nav-link" to="/">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/about">About</router-link>
+            <router-link class="nav-link" to="/contact">Contact</router-link>
+          </li>
+          <li v-if="user" class="nav-item">
+            <a class="nav-link" href="javascript://" @click.prevent="logout"
+              >Logout</a
+            >
           </li>
         </ul>
       </div>
     </nav>
-    <ul>
-      <li v-for="user in users" :key="user._id">{{ user.title }}</li>
-    </ul>
   </header>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "Header",
@@ -40,20 +42,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("todos", {
-      findUsersInStore: "find"
-    }),
-    users() {
-      return this.findUsersInStore({ query: {} }).data;
-    }
+    ...mapState("auth", { user: "payload" })
   },
   methods: {
-    ...mapActions("todos", {
-      findUsers: "find"
-    })
-  },
-  created() {
-    this.findUsers({ query: {} });
+    logout() {
+      this.$store
+        .dispatch("auth/logout")
+        .then(() => this.$router.push("/login"));
+    }
   }
 };
 </script>
