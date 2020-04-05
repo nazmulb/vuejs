@@ -1,5 +1,6 @@
 https://vuejs.org/v2/guide/
 https://www.tutorialspoint.com/vuejs/index.htm
+https://vuex.vuejs.org/
 
 
 https://www.youtube.com/watch?v=4deVCNJq3qc
