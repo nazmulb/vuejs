@@ -20,7 +20,7 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/contact">Contact</router-link>
           </li>
-          <li v-if="user" class="nav-item">
+          <li v-if="isAuthenticated" class="nav-item">
             <a class="nav-link" href="javascript://" @click.prevent="logout"
               >Logout</a
             >
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Header",
@@ -42,7 +42,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("auth", { user: "payload" })
+    ...mapGetters("auth", ["isAuthenticated"])
   },
   methods: {
     logout() {
