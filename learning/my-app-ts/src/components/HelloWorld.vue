@@ -1,7 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    {{ firstName }} {{ lastName }}
+    <h2>{{ floatValue | toFixed }}</h2>
+    {{ firstName | capitalize }} {{ lastName | capitalize }}
     <input v-model.trim="name" />
     <p>
       <button @click.prevent="decrement">-</button>
@@ -18,10 +19,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Watch, Vue } from "vue-property-decorator";
+import { Component, Prop, Watch, Vue, Mixins } from "vue-property-decorator";
+import CommonMixin from "../mixins/CommonMixin";
 
-@Component
-export default class HelloWorld extends Vue {
+@Component({
+  name: "HelloWorld",
+  filters: {
+    capitalize(value: string) {
+      return value.toUpperCase();
+    }
+  }
+})
+export default class HelloWorld extends Mixins(CommonMixin) {
   @Prop({ required: false, type: String, default: "Welcome" })
   private readonly msg!: string;
 
@@ -42,7 +51,7 @@ export default class HelloWorld extends Vue {
   }
 
   // Declared as computed property getter
-  get name() {
+  get name(): string {
     return this.firstName + " " + this.lastName;
   }
 
