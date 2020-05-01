@@ -8,6 +8,7 @@
       <button @click.prevent="decrement">-</button>
       {{ count }}
       <button @click.prevent="increase">+</button>
+      <ResetCount @reset-count="resetCount" />
     </p>
     <p>
       Kilometers:
@@ -19,11 +20,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Watch, Vue, Mixins } from "vue-property-decorator";
-import CommonMixin from "../mixins/CommonMixin";
+// @ is an alias to /src
+import { Component, Prop, Watch, Mixins } from "vue-property-decorator";
+import CommonMixin from "@/mixins/CommonMixin";
+import ResetCount from "@/components/ResetCount.vue";
 
 @Component({
   name: "HelloWorld",
+  components: {
+    ResetCount
+  },
   filters: {
     capitalize(value: string) {
       return value.toUpperCase();
@@ -35,11 +41,11 @@ export default class HelloWorld extends Mixins(CommonMixin) {
   private readonly msg!: string;
 
   // Class properties will be component data
-  private count: number = 0;
-  private firstName: string = "Nazmul";
-  private lastName: string = "Basher";
-  private kilometers: number = 0;
-  private meters: number = 0;
+  private count = 0;
+  private firstName = "Nazmul";
+  private lastName = "Basher";
+  private kilometers = 0;
+  private meters = 0;
 
   // Methods will be component methods
   public decrement() {
@@ -48,6 +54,10 @@ export default class HelloWorld extends Mixins(CommonMixin) {
 
   public increase() {
     this.count++;
+  }
+
+  public resetCount(value: number) {
+    this.count = value;
   }
 
   // Declared as computed property getter

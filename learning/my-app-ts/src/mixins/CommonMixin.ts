@@ -1,4 +1,4 @@
-import { Component, Prop, Watch, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
   name: "HelloWorld",
@@ -9,8 +9,8 @@ import { Component, Prop, Watch, Vue } from "vue-property-decorator";
   }
 })
 export default class CommonMixin extends Vue {
-    protected fvalue: number = 4.98562;
-    get floatValue(): number {
-        return this.fvalue;
-    }
+  protected fvalue = 4.98562;
+  get floatValue(): number {
+    return this.fvalue;
+  }
 }
